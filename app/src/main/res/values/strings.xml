@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Dapplytics</string>
+    <string name="h1"><u>Water crisis threat looms large claims UN climate report</u></string>
+    <string name="h2"><u><![CDATA[Government initiates project to increase disaster resilience of J&K, Ladakh]]></u></string>
+    <string name="h3"><u>Delayed monsoon withdrawal set to mark hat-trick</u></string>
+    <string name="h4"><u>Scientists analysing Uttarakhand floods highlight need to improve monitoring of glaciers</u></string>
+    <string name="h5"><u>Europe to US to India, it’s been a week of extreme weather events</u></string>
+    <string name="floodHeading">HP, Uttrakhand stare at threat due to glacier</string>
+    <string name="droughtHeading">Drought situation Recovered in Rajasthan after moderete rainfall</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="state">
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chhattisgarh</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Odisha</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Telangana</item>
+        <item>Tripura</item>
+        <item>Uttar Pradesh</item>
+        <item>Uttarakhand</item>
+        <item>West Bengal</item>
+        <item>Andaman and Nicobar Islands</item>
+        <item>Chandigarh</item>
+        <item>Dadra and Nagar Haveli</item>
+        <item>Daman and Diu</item>
+        <item>Delhi</item>
+        <item>Lakshadweep</item>
+        <item>Pondicherry</item>
+    </string-array>
+
+</resources>

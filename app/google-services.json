@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "489697755934",
+    "project_id": "dapplytics-144f0",
+    "storage_bucket": "dapplytics-144f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489697755934:android:12090d8da6eca00abe7f0f",
+        "android_client_info": {
+          "package_name": "com.vionix.dapplytics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489697755934-isu6e6b1fpmqmp667hpipiceeg810bv9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vionix.dapplytics",
+            "certificate_hash": "a17d3d95e70db88633e7ead069aaf498e36b1528"
+          }
+        },
+        {
+          "client_id": "489697755934-sn8mrqvetsiobsddln4tpodh3q0dlp9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARuddSBElX2Tbt2PO8-XD0oXVtlXDc8vE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489697755934-sn8mrqvetsiobsddln4tpodh3q0dlp9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".aboutFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="ABOUT‌"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/t1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#424242"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <ImageView
+            android:id="@+id/zoomageView3"
+            android:layout_width="match_parent"
+            android:layout_height="114dp"
+            android:layout_marginTop="17dp"
+            android:src="@drawable/tnca"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/t1" />
+
+        <ImageView
+            android:id="@+id/zoomageView4"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:src="@drawable/tncb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/zoomageView3" />
+
+        <ImageView
+            android:id="@+id/zoomageView5"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:src="@drawable/tncc"
+            app:layout_constraintTop_toBottomOf="@+id/zoomageView4" />
+        <ImageView
+            android:id="@+id/zoomageView6"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:src="@drawable/tncd"
+            app:layout_constraintTop_toBottomOf="@+id/zoomageView5" />
+        <ImageView
+            android:id="@+id/zoomageView7"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:src="@drawable/tnce"
+            app:layout_constraintTop_toBottomOf="@+id/zoomageView6" />
+        <ImageView
+            android:id="@+id/zoomageView8"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:src="@drawable/tnce"
+            app:layout_constraintTop_toBottomOf="@+id/zoomageView7" />
+        <ImageView
+            android:id="@+id/zoomageView9"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:src="@drawable/tncf"
+            app:layout_constraintTop_toBottomOf="@+id/zoomageView8" />
+        <ImageView
+            android:id="@+id/zoomageView10"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:src="@drawable/tncg"
+            app:layout_constraintTop_toBottomOf="@+id/zoomageView9" />
+        <ImageView
+            android:id="@+id/zoomageView11"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:src="@drawable/tncg"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
