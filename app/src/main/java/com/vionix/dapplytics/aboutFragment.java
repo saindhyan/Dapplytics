@@ -1,5 +1,6 @@
 package com.vionix.dapplytics;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,7 @@ public class aboutFragment extends Fragment {
     String s1="Version- 1.0.0.1  ";
     TextView textView;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -23,5 +25,6 @@ public class aboutFragment extends Fragment {
        textView = view.findViewById(R.id.t1);
        textView.setText(s1);
        return  view;
-    }
+}
+
 }

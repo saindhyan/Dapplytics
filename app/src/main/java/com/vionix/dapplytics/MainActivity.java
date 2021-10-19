@@ -6,7 +6,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.content.Intent;
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     String address;
 
     FusedLocationProviderClient fusedLocationProviderClient;
+    private Object homeFragment;
 
     @Override
     protected void onStart() {
@@ -140,21 +144,21 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.home:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new homeFragment()).commit();
-                        drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                 }
                 switch (item.getItemId()) {
                     case R.id.helpdesk:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new helpdeskFragment()).commit();
-                        drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                 }
                 switch (item.getItemId()) {
                     case R.id.about:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new aboutFragment()).commit();
-                        drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                 }
                 switch (item.getItemId()) {
@@ -163,14 +167,14 @@ public class MainActivity extends AppCompatActivity {
                         mAuth.signOut();
                         startActivity(new Intent(MainActivity.this, login.class));
                         finish();
-                        drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                 }
                 switch (item.getItemId()) {
                     case R.id.map:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new map()).commit();
-                        drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                 }
                 return true;
@@ -186,5 +190,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
 
+            FragmentManager fm = getSupportFragmentManager();
+            Fragment currentFragment = fm.findFragmentById(R.id.fragment_container);
+            if ((currentFragment instanceof homeFragment)) {
+                super.onBackPressed();
+
+            } else {
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new homeFragment()).commit();
+                navigationView.setCheckedItem(R.id.home);
+            }
+        }
+    }
 }

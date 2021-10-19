@@ -230,7 +230,7 @@ public class homeFragment extends Fragment {
                     tvResult.setText(output);
 
                     if (output.contains("Uttarakhand")){
-                        dangertittle.setText("Flood");
+                        dangertittle.setText("Flood ( HIGH ALERT )");
                         pronearea.setText("Chamoli\n Haridwar\n Nainital\n Pithoragarh\n Uttarkashi");
                         map.setImageResource(ukf);
                         map.setVisibility(View.VISIBLE);
@@ -486,6 +486,5 @@ public class homeFragment extends Fragment {
             isOpen = true;
         }
     }
-
 
 }
