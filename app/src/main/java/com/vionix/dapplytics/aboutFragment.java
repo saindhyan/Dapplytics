@@ -25,6 +25,7 @@ public class aboutFragment extends Fragment {
        textView = view.findViewById(R.id.t1);
        textView.setText(s1);
        return  view;
+       //qwerty
 }
 
 }
