@@ -11,6 +11,18 @@
     <string name="close">Close</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nh1">Uttarakhand Braces for Intense Weather; Extremely Heavy Rains In Forecast on October 18</string>
+    <string name="ndesc1">Saturday, October 16: Intense weather activity is set to drench Uttarakhand this Sunday and Monday, October 17-18, as heavy showers have been forecast across the state.</string>
+    <string name="npb1">TWC Indi</string>
+    <string name="nh2">\"उत्तराखंड: भारी बारिश का अलर्ट, सभी जिलों में सोमवार को बंद रहेंगे स्कूल और आंगनबाड़ी केंद्र \"</string>
+    <string name="ndesc2">Uttarakhand weather Update News: 18 अक्तूबर को उत्तरकाशी, चमोली, रुद्रप्रयाग, पिथौरागढ़, बागेश्वर, अल्मोड़ा, नैनीताल, चंपावत, देहरादून, टिहरी व पौड़ी के कई और हरिद्वार व ऊधमसिंह नगर के कुछ इलाकों में भारी से बहुत भारी बारिश हो सकती है।</string>
+    <string name="npb2">अमर उजाला नेटवर्क, देहरादून</string>
+    <string name="nh3">Uttarakhand Weather Update News: भारी बारिश के अलर्ट के बाद केदारनाथ यात्रा दो दिन के लिए अस्थाई रूप से रोकी</string>
+    <string name="ndesc3"><![CDATA[मौसम विभाग द्वारा 17 अक्तूबर से दो-तीन दिन तक चारधाम सहित अधिकांश पर्वतीय क्षेत्रों में भारी बारिश की चेतावनी जारी की गई है। जिसको देखते हुए प्रशासन ने केदारनाथ, गंगोत्री और यमुनोत्री धाम की यात्रा रोक दी है। ]]></string>
+    <string name="npb3">न्यूज डेस्क</string>
+    <string name="nh4">\" IMD predicts heavy rain, hailstorm in Kerala, 16 other states, UTs. Full forecast till Oct 19\"</string>
+    <string name="ndesc4">A western disturbance lies as a cyclonic circulation over southern parts of Afghanistan and nearby areas in lower levels, leading to rainfall and hailstorm in several parts of India. (HT_PRINT)</string>
+    <string name="npb4">mint</string>
 
     <string-array name="state">
         <item>Andhra Pradesh</item>

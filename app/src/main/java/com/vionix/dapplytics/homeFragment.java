@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,12 +41,21 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.jacksonandroidnetworking.JacksonParserFactory;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,6 +86,12 @@ public class homeFragment extends Fragment {
     private List<headingmodel> headingmodelList = new ArrayList<>();
     private int pagenumber = 1, per_page = 20;
     String cl = "";
+    private static  String API_KEY="b971358de21d4af48ae24b5faf06bbok";
+    private static String TAG="MainActivity";
+    private ArrayList<NewsArticle> mArticleList;
+    private ArticleAdapter mArticleAdapter;
+    FirebaseDatabase database=FirebaseDatabase.getInstance();
+    String cordinate;
 
 
 //    private String apikey = "67df503444f54f2e8d521e0de23fbc2e";
@@ -106,6 +122,7 @@ public class homeFragment extends Fragment {
         super.onStart();
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             getlocation();
+            getlocation2();
             getWeatherDetails();
 
         } else {
@@ -310,12 +327,31 @@ public class homeFragment extends Fragment {
         pronearea = view.findViewById(R.id.pronareas);
         map = view.findViewById(R.id.map);
 
-        nr = view.findViewById(R.id.nr);
-//        fetchData();
-        headingmodelList.add(new headingmodel("Uttarakhand Braces for Intense Weather; Extremely Heavy Rains In Forecast on October 18", "Saturday, October 16: Intense weather activity is set to drench Uttarakhand this Sunday and Monday, October 17-18, as heavy showers have been forecast across the state.", "TWC Indi"));
-        headingmodelList.add(new headingmodel("उत्तराखंड: भारी बारिश का अलर्ट, सभी जिलों में सोमवार को बंद रहेंगे स्कूल और आंगनबाड़ी केंद्र ", "Uttarakhand weather Update News: 18 अक्तूबर को उत्तरकाशी, चमोली, रुद्रप्रयाग, पिथौरागढ़, बागेश्वर, अल्मोड़ा, नैनीताल, चंपावत, देहरादून, टिहरी व पौड़ी के कई और हरिद्वार व ऊधमसिंह नगर के कुछ इलाकों में भारी से बहुत भारी बारिश हो सकती है।", "अमर उजाला नेटवर्क, देहरादून"));
-        headingmodelList.add(new headingmodel("Uttarakhand Weather Update News: भारी बारिश के अलर्ट के बाद केदारनाथ यात्रा दो दिन के लिए अस्थाई रूप से रोकी", "मौसम विभाग द्वारा 17 अक्तूबर से दो-तीन दिन तक चारधाम सहित अधिकांश पर्वतीय क्षेत्रों में भारी बारिश की चेतावनी जारी की गई है। जिसको देखते हुए प्रशासन ने केदारनाथ, गंगोत्री और यमुनोत्री धाम की यात्रा रोक दी है। ", "न्यूज डेस्क"));
-        headingmodelList.add(new headingmodel(" IMD predicts heavy rain, hailstorm in Kerala, 16 other states, UTs. Full forecast till Oct 19", "A western disturbance lies as a cyclonic circulation over southern parts of Afghanistan and nearby areas in lower levels, leading to rainfall and hailstorm in several parts of India. (HT_PRINT)", "mint"));
+        nr = view.findViewById(R.id.recyclerview_id);
+
+
+
+//        AndroidNetworking.initialize(getContext());
+//
+//        // setting the JacksonParserFactory
+//        AndroidNetworking.setParserFactory(new JacksonParserFactory());
+//
+//        // assigning views to their ids
+//        nr=view.findViewById(R.id.recyclerview_id);
+//
+//        // setting the recyclerview layout manager
+//        nr.setLayoutManager(new LinearLayoutManager(getContext()));
+//
+//        // initializing the ArrayList of articles
+//        mArticleList=new ArrayList<>();
+//
+//        // calling get_news_from_api()
+//        get_news_from_api();
+////        fetchData();
+        headingmodelList.add(new headingmodel(getString(R.string.nh1), getString(R.string.ndesc1), getString(R.string.npb1)));
+        headingmodelList.add(new headingmodel(getString(R.string.nh2), getString(R.string.ndesc2), getString(R.string.npb2)));
+        headingmodelList.add(new headingmodel(getString(R.string.nh3), getString(R.string.ndesc3), getString(R.string.npb3)));
+        headingmodelList.add(new headingmodel(getString(R.string.nh4), getString(R.string.ndesc4), getString(R.string.npb4)));
 //        headingmodelList.add(new headingmodel("heading 1","fghjkjhhvgv","piyush"));
 //        headingmodelList.add(new headingmodel("heading 1","fghjkjhhvgv","piyush"));
 
@@ -417,11 +453,43 @@ public class homeFragment extends Fragment {
         return view;
 
     }
+    private void getlocation2() {
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                Location location = task.getResult();
+                if (location != null) {
+                    Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+
+                    try {
+                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+                        cordinate=addresses.get(0).getAddressLine(0);
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
+    }
+
 
     private void sendsms() {
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-
-            // Use the Builder class for convenient dialog construction
+     // Use the Builder class for convenient dialog construction
             AlertDialog alertDialog1 = new AlertDialog.Builder(
                     getContext()).create();
 
@@ -435,16 +503,31 @@ public class homeFragment extends Fragment {
 
             // Setting OK Button
             alertDialog1.setButton("YES", new DialogInterface.OnClickListener() {
-
                 public void onClick(DialogInterface dialog, int which) {
                     // Write your code here to execute after dialog
                     // closed
-                    String cordinates = "coer collage";
-                    String phone = "+91 9675028282";
-                    String message = "I Need Help" + cordinates + "from dapplytics";
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(phone, null, message, null, null);
-                    Toast.makeText(getContext(), "SMS SENT", Toast.LENGTH_SHORT).show();
+
+                    database.getReference().child("number").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                    String phone = snapshot.getValue().toString();
+                                    String message = "I Need Help \nLocation - " + cordinate + "\n\n\n from dapplytics";
+                                    SmsManager smsManager = SmsManager.getDefault();
+                                    smsManager.sendTextMessage(phone, null, message, null, null);
+                                Toast.makeText(getContext(), "SMS SENT", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
 
                 }
             });
@@ -485,6 +568,86 @@ public class homeFragment extends Fragment {
             cmp.setClickable(true);
             isOpen = true;
         }
+    }
+
+    public void get_news_from_api(){
+        // clearing the articles list before adding news ones
+        mArticleList.clear();
+
+        // Making a GET Request using Fast
+        // Android Networking Library
+        // the request returns a JSONObject containing
+        // news articles from the news api
+        // or it will return an error
+        AndroidNetworking.get("https://newsapi.org/v2/top-headlines")
+                .addQueryParameter("country", "in")
+                .addQueryParameter("apiKey",API_KEY)
+                .addHeaders("token", "1234")
+                .setTag("test")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // disabling the progress bar
+
+                        // handling the response
+                        try {
+
+                            // storing the response in a JSONArray
+                            JSONArray articles=response.getJSONArray("articles");
+
+                            // looping through all the articles
+                            // to access them individually
+                            for (int j=0;j<articles.length();j++)
+                            {
+                                // accessing each article object in the JSONArray
+                                JSONObject article=articles.getJSONObject(j);
+
+                                // initializing an empty ArticleModel
+                                NewsArticle currentArticle=new NewsArticle();
+
+                                // storing values of the article object properties
+                                String author=article.getString("author");
+                                String title=article.getString("title");
+                                String description=article.getString("description");
+                                String url=article.getString("url");
+                                String urlToImage=article.getString("urlToImage");
+                                String publishedAt=article.getString("publishedAt");
+                                String content=article.getString("content");
+
+                                // setting the values of the ArticleModel
+                                // using the set methods
+                                currentArticle.setAuthor(author);
+                                currentArticle.setTitle(title);
+                                currentArticle.setDescription(description);
+                                currentArticle.setUrl(url);
+                                currentArticle.setUrlToImage(urlToImage);
+                                currentArticle.setPublishedAt(publishedAt);
+                                currentArticle.setContent(content);
+
+                                // adding an article to the articles List
+                                mArticleList.add(currentArticle);
+                            }
+
+                            // setting the adapter
+                            mArticleAdapter=new ArticleAdapter(getContext(),mArticleList);
+                            nr.setAdapter(mArticleAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            // logging the JSONException LogCat
+                            Log.d(TAG,"Error : "+e.getMessage());
+                        }
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // logging the error detail and response to LogCat
+                        Log.d(TAG,"Error detail : "+error.getErrorDetail());
+                        Log.d(TAG,"Error response : "+error.getResponse());
+                    }
+                });
     }
 
 }
